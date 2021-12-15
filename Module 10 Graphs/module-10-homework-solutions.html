@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CMPS 260: Module 10 Homework</title>
+<style>* { font-family: monospace; }</style>
+<script>
+//-------------------//
+// Graph terminology //
+//-------------------//
+console.log("Graph terminology");
+
+// Skip.
+
+
+
+//----------------------//
+// Representing a graph //
+//----------------------//
+console.log("Representing a graph");
+
+// Skip.
+
+
+
+//--------------------------//
+// Creating the Graph class //
+//--------------------------//
+console.log("Creating the Graph class");
+
+// Skip.
+
+
+
+//------------------//
+// Graph traversals //
+//------------------//
+console.log("Graph traversals");
+
+// Skip.
+
+
+
+//--------------------------//
+// Shortest path algorithms //
+//--------------------------//
+console.log("Shortest path algorithms");
+
+// Skip.
+
+
+
+//-----------------------------//
+// Minimum spanning tree (MST) //
+//-----------------------------//
+console.log("Minimum spanning tree (MST)");
+
+// 1. Implement Prim's algorithm (use code from class and the book).
+
+function prim(graph) {
+  // unmodified
+  var parent = [];
+  var key = [];
+  var visited = [];
+  var length = graph.length;
+  for (var i = 0; i < length; i++) {
+    key[i] = Infinity;
+    visited[i] = false;
+  }
+  key[0] = 0;
+  parent[0] = -1;
+  for (var i = 0; i < length-1; i++) {
+    var u = minKey(key, visited);
+    visited[u] = true;
+    for (var v = 0; v < length; v++) {
+      if (graph[u][v] && visited[v] === false && graph[u][v] < key[v]) {
+        parent[v] = u;
+        key[v] = graph[u][v];
+      }
+    }
+  }
+  return parent;
+}
+
+function minKey(dist, visited) {
+  // unmodified
+  var min = Infinity;
+  var minIndex = -1;
+  for (var v = 0; v < dist.length; v++) {
+    if (visited[v] === false && dist[v] <= min) {
+      min = dist[v];
+      minIndex = v;
+    }
+  }
+  return minIndex;
+}
+
+// 2. Show that your code works using the example from the book in the minimum
+//    spanning tree section. Print both the edges and the weights that are part
+//    of the minimum spanning tree.
+
+var graph = [[0, 2, 4, 0, 0, 0],
+             [2, 0, 2, 4, 2, 0],
+             [4, 2, 0, 0, 3, 0],
+             [0, 4, 0, 0, 3, 2],
+             [0, 2, 3, 3, 0, 2],
+             [0, 0, 0, 2, 2, 0]];
+
+var parents = prim(graph);
+console.log(parents);
+for (var i = 1; i < parents.length; i++) {
+  var child = i;
+  var parent = parents[child];
+  console.log("Node " + child + " has parent " + parent + " with weight " + graph[child][parent] + ".");
+}
+
+
+
+//---------//
+// Project //
+//---------//
+console.log("Project");
+
+// Skip.
+
+
+
+</script>
+</head>
+<body>
+  See console!
+</body>
+</html>
