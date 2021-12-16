@@ -1,0 +1,280 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CMPS 260: Module 6 Homework</title>
+<style>* { font-family: monospace; }</style>
+<script>
+//-----------------------//
+// Structuring a dataset //
+//-----------------------//
+console.log("Structuring a dataset");
+
+// Skip.
+
+
+
+//----------------//
+// Creating a set //
+//----------------//
+console.log("Creating a set");
+
+function Set() {
+  this.items = {}; // note that this is an object instead of an array
+}
+
+Set.prototype.add = function(value) {
+  // add new item to the set
+  if (!this.has(value)) {
+    this.items[value] = value;
+    return true;
+  }
+  return false;
+};
+
+Set.prototype.delete = function(value) {
+  // remove item from the set
+  if (this.has(value)) {
+    delete this.items[value];
+    return true;
+  }
+  return false;
+};
+
+Set.prototype.has = function(value) {
+  // return true if the value exists in the set, false otherwise
+  return this.items.hasOwnProperty(value);
+};
+
+Set.prototype.clear = function() {
+  // remove all the items from the set
+  this.items = {};
+};
+
+Set.prototype.size = function() {
+  // returns the number of items in the set
+  return Object.keys(this.items).length;
+};
+
+Set.prototype.values = function() {
+  // returns an array of all items in the set
+  //return Object.keys(items);
+  var values = [];
+  for (var i = 0, keys=Object.keys(this.items); i < keys.length; i++) {
+    values.push(this.items[keys[i]]);
+  }
+  return values;
+};
+
+Set.prototype.union = function(otherSet) {
+  var unionSet = new Set();
+  var values = this.values();
+  for (var i = 0; i < values.length; i++) {
+    unionSet.add(values[i]);
+  }
+  var values = otherSet.values();
+  for (var i = 0; i < values.length; i++) {
+    unionSet.add(values[i]);
+  }
+  return unionSet;
+};
+
+Set.prototype.intersection = function(otherSet) {
+  var intersectionSet = new Set();
+  var values = this.values();
+  for (var i = 0; i < values.length; i++) {
+    if (otherSet.has(values[i])) {
+      // value is in both sets
+      intersectionSet.add(values[i]);
+    }
+  }
+  return intersectionSet;
+};
+
+Set.prototype.difference = function(otherSet) {
+  var differenceSet = new Set();
+  var values = this.values();
+  for (var i = 0; i < values.length; i++) {
+    if (!otherSet.has(values[i])) {
+      // value is not in the other set
+      differenceSet.add(values[i]);
+    }
+  }
+  return differenceSet;
+};
+
+Set.prototype.subset = function(otherSet) {
+  if (this.size() > otherSet.size()) {
+    return false;
+  }
+  else {
+    var values = this.values();
+    for (var i = 0; i < values.length; i++) {
+      if (!otherSet.has(values[i])) {
+        // value is not in the other set
+        // so it cannot be a subset
+        return false;
+      }
+    }
+    return true;
+  }
+};
+
+var set = new Set();
+set.add(1);
+console.log(set.values());
+console.log(set.has(1));
+console.log(set.size());
+
+set.add(2);
+console.log(set.values());
+console.log(set.has(2));
+console.log(set.size());
+
+set.delete(1);
+console.log(set.values());
+
+set.delete(2);
+console.log(set.values());
+
+
+
+//----------------//
+// Set operations //
+//----------------//
+console.log("Set operations");
+
+// 1. Implement the union set function using the prototype.
+
+Set.prototype.union = function(otherSet){
+  var unionSet = new Set();
+  var values = this.values();
+  for (var i = 0; i < values.length; i++){
+    unionSet.add(values[i]);
+  }
+  values = otherSet.values();
+  for (var i = 0; i < values.length; i++){
+    unionSet.add(values[i]);
+  }
+  return unionSet;
+  
+};
+
+
+// 2. Implement the intersection set function using the prototype.
+
+Set.prototype.intersection = function(otherSet){
+  var intersectionSet = new Set();
+  var values = this.values();
+  for (let i = 0; i < values.length; i++) {
+    if (otherSet.has(values[i])) {
+      intersectionSet.add(values[i]);
+    }
+  }
+  return intersectionSet;
+}
+
+
+// 3. Implement the set difference function using the prototype.
+
+Set.prototype.difference = function(otherSet) {
+  var differenceSet = new Set();
+  var values = this.values();
+  for (var i = 0; i < values.length; i++) {
+    if (! otherSet.has(values[i])) {
+      differenceSet.add(values[i]);
+    }
+  }
+  return differenceSet;
+};
+
+// 4. Implement the subset function using the prototype.
+
+Set.prototype.subset = function(otherSet) {
+  if (this.size() > otherSet.size()) {
+    return false;
+  }
+  else {
+    var values = this.values();
+    for (let i = 0; i < values.length; i++) {
+      if (!otherSet.has(values[i])) {
+        return false;
+      }
+    }
+    return true;
+  }
+}
+
+//---------------------//
+// ES6 – the Set class //
+//---------------------//
+console.log("ES6 – the Set class");
+
+// Skip.
+
+
+
+//---------//
+// Project //
+//---------//
+console.log("Project");
+
+// A professor keeps attendence of classes with the following results:
+// All students: Mary, Joe, Tim, Rosalee, Vincent, Caroline
+// Class 1: Rosalee, Joe, Mary, Tim
+// Class 2: Mary, Tim, Vincent, Rosalee, Caroline
+// Class 3: Caroline, Tim, Vincent, Rosalee, Joe
+
+// 1. Create a set of students for each class.
+
+
+var class1 = new Set();
+var class2 = new Set();
+var class3 = new Set();
+var classAll = new Set();
+
+class1.add("Rosalee")
+class1.add("Joe")
+class1.add("Mary")
+class1.add("Tim")
+class2.add("Mary")
+class2.add("Tim")
+class2.add("Vincent")
+class2.add("Rosalee")
+class2.add("Caroline")
+class3.add("Caroline")
+class3.add("Tim")
+class3.add("Vincent")
+class3.add("Rosalee")
+class3.add("Joe")
+classAll.add("Mary")
+classAll.add("Joe")
+classAll.add("Tim")
+classAll.add("Rosalee")
+classAll.add("Vincent")
+classAll.add("Caroline")
+
+// 2. Use set operations to get a list of students that attended at least
+//    one class.
+
+unionOneClass = class1.union(class2).union(class3)
+console.log(unionOneClass)
+
+
+// 3. Use set operations to get a list of students that attended all classes.
+
+interClass = class1.intersection(class2).intersection(class3)
+console.log(interClass)
+
+// 4. Show that the results for (2) and (3) are a subset of all students.
+
+console.log("Result is: ",unionOneClass.subset(classAll))
+console.log("Result is: ",interClass.subset(classAll))
+
+
+</script>
+</head>
+<body>
+  See console!
+</body>
+</html>

@@ -1,0 +1,134 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CMPS 260: Module 1 Homework</title>
+<style>* { font-family: monospace; }</style>
+<script>
+
+// NOTE: You can enter both code and explanations. For an explanation, start
+//       the line with '//' which indicates a comment.
+
+// NOTE: console.log prints text to the browser console that you can enable
+//       to see the output. It is a little bit more convenient than alert so
+//       we will use it most of the time.
+
+// NOTE: Please review the following links regularly:
+//       https://it.pointpark.edu/tutorials/arrays-vs-objects/
+//       https://it.pointpark.edu/tutorials/no-prototype-vs-prototype/
+//       https://it.pointpark.edu/tutorials/implementation-vs-interface/
+
+
+
+//----------------------------//
+// Setting up the environment //
+//----------------------------//
+console.log("Setting up the environment");
+
+// 1. When you are done copy this file to your jail and submit the link through Schoology.
+
+
+
+//-------------------//
+// JavaScript basics //
+//-------------------//
+console.log("JavaScript basics");
+
+// 1. Figure out what the << operator does. HINT: it is related to &.
+// The << operator means Left Shift.. This operator shifts the first operand the specified number of bits to the left.
+// Theres not much in the book explaning Left Shift so I had to search do some research of my own online.
+// Example: 9 << 2 = 00000000000000000000000000100100 = <- That Equals 36
+
+//--------------------//
+// Control structures //
+//--------------------//
+console.log("Control structures");
+
+  // 1. Write an if statement that prints the number of days in a month to the console (using 3 letter abbreviations).
+var month = "jun";
+
+
+if (month  = ("jun","apr","sep","nov")) {
+  console.log("There are 30 days in your month");
+}
+
+else {
+  console.log("There are either 31 or 28/29 Days in your month");
+}
+
+
+// 2. Write a loop to calculate 1+2+3+...+n and print it to the console.
+var n = 50;
+// ... put loop here ...
+var total = 1;
+for (var i = 1; i <= n; i++) {
+  total = total * i;
+}
+console.log("Factorial: " + total);
+
+
+//-----------//
+// Functions //
+//-----------//
+console.log("Functions");
+
+// 1. Write a function to check if an array contains a specific number but is not at the start or the end.
+function checkForNumber(arr, num) {
+  // modify
+  return arr[1] === num || arr[arr.length-0] === num;
+}
+console.log("Checking for number: " + checkForNumber([4, 2, 5, 3], 4)); // should be false
+console.log("Checking for number: " + checkForNumber([4, 2, 5, 3], 3)); // should be false
+console.log("Checking for number: " + checkForNumber([4, 2, 5, 7, 3], 2)); // should be true
+console.log("Checking for number: " + checkForNumber([4, 2, 5, 7, 3], 13)); // should be false
+console.log("Checking for number: " + checkForNumber([4, 2, 5, 5], 5)); // should be false
+
+
+
+//-------------------------------------------//
+// Object-oriented programming in JavaScript //
+//-------------------------------------------//
+console.log("Object-oriented programming in JavaScript");
+
+// 1. Add methods to the following object to calculate the circumference and area.
+
+var lenRect = 5
+var widthRec = 5
+
+var areaRect = lenRect * widthRec ;
+console.log("The area of the rectangle is: " + areaRect);
+
+var circumRect = 2 * (lenRect) + 2 * (widthRec);
+console.log("The circumference of the rectangle is: " + circumRect);
+
+
+
+//---------------------//
+// Debugging and tools //
+//---------------------//
+
+// None.
+
+
+
+//-----------------------------------------------//
+// Introduction to ECMAScript 6 and ECMAScript 7 //
+//-----------------------------------------------//
+
+// None.
+
+
+
+//---------//
+// Project //
+//---------//
+
+// Normally a bigger programming task follows at the end.
+// We skip this in the first week.
+
+</script>
+</head>
+<body>
+  See Console!
+</body>
+</html>

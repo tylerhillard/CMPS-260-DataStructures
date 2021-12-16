@@ -1,0 +1,186 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CMPS 260: Module 13 Homework</title>
+<style>* { font-family: monospace; }</style>
+<script>
+//----------------//
+// Big O notation //
+//----------------//
+console.log("Big O notation");
+
+// 1. What is the worst case complexity of the following function?
+
+function hasDuplicates(arr) {
+  for (var i = 0; i < arr.length; i++) {
+    for (var j = 0; j < arr.length; j++) {
+      if (i !== j && arr[i] === arr[j]) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+// O(n^2) because you have two nested for loops.
+
+// 2. Implement a faster version of the same function and analyze the
+//    complexity of this approach.
+
+function hasDuplicatesFast(arr) {
+  arr.sort(); // O(n log(n))
+  // complexity of loop: O(n)
+  // total complexity: O(n log(n)) + O(n) = O(n log(n))
+  for (var i = 1; i < arr.length; i++) {
+    // now we only need to compare adjacent entries
+    if (arr[i-1] === arr[i]) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function hasDuplicatesFaster(arr) {
+  var seen = {}; // assume this works as hash table
+  // Worst case complexity: O(n^2)
+  // Average case complexity: O(n)
+  for (var i = 0; i < arr.length; i++) {
+    var elt = arr[i];
+    if (seen[elt]) {
+      // we have seen the element before
+      return true;
+    }
+    // add element to the seen array
+    seen[elt] = true;
+  }
+  return false;
+}
+
+
+
+//----------------------------//
+// Having fun with algorithms //
+//----------------------------//
+console.log("Having fun with algorithms");
+
+// 1. Solve http://www.spoj.com/problems/PALIN/
+
+function reverseString(str) {
+  // taken from https://medium.freecodecamp.org/how-to-reverse-a-string-in-javascript-in-3-different-ways-75e4763c68cb
+
+  // Step 1. Use the split() method to return a new array
+  var splitString = str.split(""); // var splitString = "hello".split("");
+    // ["h", "e", "l", "l", "o"]
+
+    // Step 2. Use the reverse() method to reverse the new created array
+    var reverseArray = splitString.reverse(); // var reverseArray = ["h", "e", "l", "l", "o"].reverse();
+    // ["o", "l", "l", "e", "h"]
+
+    // Step 3. Use the join() method to join all elements of the array into a string
+    var joinArray = reverseArray.join(""); // var joinArray = ["o", "l", "l", "e", "h"].join("");
+    // "olleh"
+
+    //Step 4. Return the reversed string
+    return joinArray; // "olleh"
+    //return str.split("").reverse().join("");
+}
+
+function findSmallestPalindrome(k) {
+  while (true) {
+    k++;
+    var kAsString = k.toString();
+    if (kAsString === reverseString(kAsString)) {
+      return k;
+    }
+  }
+}
+
+// tests
+console.log(findSmallestPalindrome(808) === 818);
+console.log(findSmallestPalindrome(2133) === 2222);
+
+/*
+var array1 = [1, 2, 3];
+var array2 = array1; //[1, 2, 3];
+
+console.log("array comparison: " + (array1 === array2));
+*/
+
+
+
+//---------//
+// Project //
+//---------//
+console.log("Project");
+
+// 1. Solve https://csacademy.com/contest/interview-archive/task/intersecting-rectangles/
+//    What is the runtime complexity of your solution?
+//    HINT: Try to break down the problems into smaller steps. For example,
+//          find a convenient way to represent rectangles and define a function
+//          that tests whether one rectangle is inside another. Then test your
+//          code on just two rectangles first to make sure it works.
+
+function Rectangle(x1, y1, x2, y2) {
+  this.x1 = x1;
+  this.y1 = y1;
+  this.x2 = x2;
+  this.y2 = y2;
+}
+
+Rectangle.prototype.intersect = function(rect) {
+  var r1 = this;
+  var r2 = rect;
+  if (r1.y2 < r2.y1 || r1.y1 > r2.y2 || r1.x2 < r2.x1 || r1.x1 > r2.x2) {
+    // rectangles do not intersect, see also https://articles.leetcode.com/determine-if-two-rectangles-overlap/
+    return false;
+  }
+  else {
+    return true;
+  }
+}
+
+function calcRectangles(rectangles) {
+  var cnt = 0;
+  for (var i = 0; i < rectangles.length; i++) {
+    for (var j = i+1; j < rectangles.length; j++) {
+      var r1 = rectangles[i];
+      var r2 = rectangles[j];
+      if (r1.intersect(r2)) {
+        cnt++;
+      }
+    }
+  }
+  console.log(cnt);
+}
+
+var r1 = new Rectangle(1, 1, 7, 10);
+var r2 = new Rectangle(3, 5, 10, 8);
+var rectangles1 = [r1, r2];
+
+var r1 = new Rectangle(3, 2, 5, 8);
+var r2 = new Rectangle(7, 3, 10, 10);
+var rectangles2 = [r1, r2];
+
+var r1 = new Rectangle(1, 1, 5, 5);
+var r2 = new Rectangle(3, 2, 6, 4);
+var r3 = new Rectangle(4, 8, 8, 10);
+var r4 = new Rectangle(3, 9, 7, 10);
+var rectangles3 = [r1, r2, r3, r4];
+
+calcRectangles(rectangles1);
+calcRectangles(rectangles2);
+calcRectangles(rectangles3);
+
+// The runtime complexity is O(n^2).
+// It is possible to solve in O(n log(n)) by sorting coordinates, but this is
+// not so straightforward.
+
+
+
+</script>
+</head>
+<body>
+  See console!
+</body>
+</html>

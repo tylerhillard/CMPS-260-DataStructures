@@ -1,0 +1,114 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CMPS 260: Module 13 Homework</title>
+<style>* { font-family: monospace; }</style>
+<script>
+//----------------//
+// Big O notation //
+//----------------//
+console.log("Big O notation");
+
+// 1. What is the worst case complexity of the following function?
+
+function hasDuplicates(arr) {
+  for (var i = 0; i < arr.length; i++) {
+    for (var j = 0; j < arr.length; j++) {
+      if (i !== j && arr[i] === arr[j]) {
+        return true;
+      }
+    }
+  }
+  return false;
+}
+
+//I believe this functions worst case would be 0(n^2)
+
+// 2. Implement a faster version of the same function and analyze the
+//    complexity of this approach.
+
+hasDuplicatesFast();
+function hasDuplicatesFast() {
+   let arr = ["abc","xy","bb", "abc"];
+   let result = false;
+   // create a Set with array elements
+   const s = new Set(arr);
+   // compare the size of array and Set
+   if(arr.length !== s.size){
+      result = true;
+   }
+   if(result) {
+      console.log('Array contains duplicate elements');
+   } else {
+      console.log('Array does not contain duplicate elements');
+   }
+}
+
+
+//----------------------------//
+// Having fun with algorithms //
+//----------------------------//
+console.log("Having fun with algorithms");
+
+// 1. Solve http://www.spoj.com/problems/PALIN/
+
+function smallestPalindrome(str) {
+  for (var i = 0; i < str.length/2; i++) {
+    if (str[i] !== str[str.length-i-1]) {
+      return false;
+    }
+  }
+  return true;
+}
+
+
+ console.log(smallestPalindrome("808")==="818");
+ console.log(smallestPalindrome("2133")==="222");
+
+
+
+
+
+//---------//
+// Project //
+//---------//
+console.log("Project");
+
+// 1. Solve https://csacademy.com/contest/interview-archive/task/intersecting-rectangles/
+//    What is the runtime complexity of your solution?
+//    HINT: Try to break down the problems into smaller steps. For example,
+//          find a convenient way to represent rectangles and define a function
+//          that tests whether one rectangle is inside another. Then test your
+//          code on just two rectangles first to make sure it works.
+
+
+const maxOfX = (rec) => (Math.max(rec.x1, rec.x2));
+const maxOfY = (rec) => (Math.max(rec.y1, rec.y2));
+const minOfX = (rec) => (Math.min(rec.x1, rec.x2));
+const minOfY = (rec) => (Math.min(rec.y1, rec.y2));
+const comBinedRectangle = (rec1, rec2) => {
+  let overlappedRec = {};
+  const NolappingFromX = maxOfX(rec1) <= minOfX(rec2) || minOfX(rec1) >= maxOfX(rec2);
+  const NolappingFromY = maxOfY(rec1) <= minOfY(rec2) || minOfY(rec1) >= maxOfY(rec2);
+  if (!(NolappingFromX || NolappingFromY)) {
+    overlappedRec.x1 = Math.max(minOfX(rec1), minOfX(rec2));
+    overlappedRec.y1 = Math.max(minOfY(rec1), minOfY(rec2));
+    overlappedRec.x2 = Math.min(maxOfX(rec1), maxOfX(rec2));
+    overlappedRec.y2 = Math.min(maxOfY(rec1), maxOfY(rec2));
+  }
+
+  return overlappedRec;
+}
+const rectangle1 = { x1: 2, y1: 2, x2: 4, y2: 4 };
+const rectangle2 = { x1: 3, y1: 3, x2: 6, y2: 2 };
+console.log(comBinedRectangle(rectangle1, rectangle2));
+// { x1: 3, y1: 2, x2: 4, y2: 3 }
+
+
+</script>
+</head>
+<body>
+  See console!
+</body>
+</html>

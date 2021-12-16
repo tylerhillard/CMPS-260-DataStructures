@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CMPS 260: Module 6 Class</title>
+<style>* { font-family: monospace; }</style>
+<script>
+//-----------------------//
+// Structuring a dataset //
+//-----------------------//
+console.log("Structuring a dataset");
+
+// Skip.
+
+
+
+//----------------//
+// Creating a set //
+//----------------//
+console.log("Creating a set");
+
+// 1. Finish the implemention of the set data structure below. Note that this
+//    implementation does not use the prototype (see homework).
+
+function Set() {
+  var items = {}; // note that this is an object instead of an array
+
+  this.add = function(value) {
+    if (!this.has(value)){
+      items[value] = value; 
+      return true;
+  }
+  return false;
+};
+ 
+
+  this.delete = function(value){
+    if (this.has(value)){
+      delete items[value]; 
+      return true;
+ }
+ return false;
+};
+
+
+  this.has = function(value) {
+   return value in items;
+  };
+
+  this.clear = function() {
+    items = {};
+  };
+
+  this.size = function() {
+    return Object.keys(items).length;
+  };
+
+  this.values = function() {
+     let values = [];
+      for (let i=0, keys=Object.keys(items); i<keys.length; i++) {
+        values.push(items[keys[i]]);
+    }
+    return values;
+};
+}
+
+
+//----------------//
+// Set operations //
+//----------------//
+console.log("Set operations");
+
+//Union
+this.union = function(otherSet){
+ let unionSet = new Set(); //{1}
+ let values = this.values(); //{2}
+ for (let i=0; i<values.length; i++){
+ unionSet.add(values[i]);
+ }
+ values = otherSet.values(); //{3}
+ for (let i=0; i<values.length; i++){
+ unionSet.add(values[i]);
+ }
+ return unionSet;
+};
+
+//Intersection
+this.intersection = function(otherSet){
+ let intersectionSet = new Set(); //{1}
+ 
+ let values = this.values();
+ for (let i=0; i<values.length; i++){ //{2}
+    if (otherSet.has(values[i])){ //{3}
+      intersectionSet.add(values[i]); //{4}
+    }
+  }
+ return intersectionSet;
+};
+
+//Difference
+this.difference = function(otherSet){
+ let differenceSet = new Set(); //{1}
+ 
+ let values = this.values();
+ for (let i=0; i<values.length; i++){ //{2}
+    if (!otherSet.has(values[i])){ //{3}
+      differenceSet.add(values[i]); //{4}
+    }
+ }
+ return differenceSet;
+};
+
+//Subset
+this.subset = function(otherSet){
+  if (this.size() > otherSet.size()){ //{1}
+    return false;
+ } else {
+   let values = this.values();
+   for (let i=0; i<values.length; i++){ //{2}
+      if (!otherSet.has(values[i])){ //{3}
+        return false; //{4}
+      }
+    }
+    return true; //{5}
+  }
+};
+
+
+
+//---------------------//
+// ES6 – the Set class //
+//---------------------//
+console.log("ES6 – the Set class");
+
+// Skip.
+
+
+
+//---------//
+// Project //
+//---------//
+console.log("Project");
+
+// 1. Write a function that takes two sets as input and returns true if
+//    they have the same elements, and false otherwise. Test your code.
+
+function isEqual(set1, set2) {
+  // ...
+}
+
+// 2. Create a new stack and push the numbers 1, 2, 3, 4, and 5 onto it. Then
+//    create a new set and pop all the elements off the stack and add them to
+//    the set. Show your program works.
+
+
+
+// 3. Get all the items from the set and push them back onto the stack. Show
+//    that your program works.
+
+
+
+</script>
+</head>
+<body>
+  See console!
+</body>
+</html>
+
+

@@ -1,0 +1,243 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CMPS 260: Module 14 Class</title>
+<style>* { font-family: monospace; }</style>
+<script>
+//--------------------------------//
+// Review Dictionaries and Hashes //
+//--------------------------------//
+
+
+/*
+Things to Know:
+
+Minimum coint change
+functional programming recurssive
+
+*/
+
+
+
+
+console.log("Review Dictionaries and Hashes");
+
+// 1. Create a hash table that uses the following function as hash function:
+
+function HashTable() {
+  // store all elements in the table array
+  var table = [];
+
+  function hashCode(str) {
+    var hash = 0;
+    if (str.length == 0) return hash;
+    for (var i = 0; i < str.length; i++) {
+      var char = str.charCodeAt(i);
+      hash = ((hash<<5)-hash)+char;
+      hash = hash & hash;
+    }
+    return hash % 1013;
+}
+};
+
+
+  
+
+// 2. Use a dictionary to store phone numbers that map to names like a phone
+//    book. Enter at least 5 phone numbers (do not use real data).
+
+function Dictionary() {
+  // store all elements in the items object
+  var items = {};
+
+  this.set = function(key, value) {
+    // add a new key-value pair to the dictionary
+    items[key] = value;
+  };
+
+  this.delete = function(key) {
+    // delete a key-value pair
+    if (this.has(key)) {
+      delete items[key];
+      return true;
+    }
+    return false;
+  };
+
+  this.has = function(key) {
+    // return true if key is in the dictionary, false otherwise
+    return key in items;
+  };
+
+  this.get = function(key) {
+    // return the value that matches key
+    return this.has(key) ? items[key] : undefined;
+  };
+
+  this.clear = function() {
+    // remove all key-value pairs
+    items = {};
+  };
+
+  this.size = function() {
+    // return the number of key-value pairs
+    return Object.keys(items).length;
+  };
+
+  this.keys = function() {
+    // return an array of all the keys
+    return Object.keys(items);
+  };
+
+  this.values = function() {
+    // return an array of all the values
+    var values = [];
+    for (var k in items) {
+      if (this.has(k)) {
+        values.push(items[k]);
+      }
+    }
+    return values;
+  };
+
+  this.getItems = function() {
+    return items;
+  };
+}
+
+// 2. Write some tests that show that your code works.
+
+var dictionary = new Dictionary();
+dictionary.set("Tyler", "555-555-0001");
+dictionary.set("Tanner", "555-555-0002");
+dictionary.set("Trey", "555-555-0003");
+dictionary.set("Theresa", "555-555-0004");
+dictionary.set("Tyrone", "555-555-0005");
+
+console.log(dictionary.keys());
+console.log(dictionary.values());
+console.log(dictionary.getItems());
+
+
+// 3. Create a function that takes two phone books and checks whether the
+//    numbers are mapped consistently. This means that if a phone number
+//    appears in both phone books, they should map to exactly the same name. It
+//    should return true when this is the case, false otherwise. Test your code.
+//    NOTE: An algorithm like this could be used when syncing contacts.
+
+function phoneBooksAreConsistent(pb1, pb2) {
+  // todo
+}
+
+
+
+//--------------//
+// Review Trees //
+//--------------//
+console.log("Trees");
+
+// 1. Find the number in a binary search tree that is closest to a given value.
+//    For example, if the given value is 13 and the tree contains 3, 5, 15, 23,
+//    and 37 the number that should be returned is 15.
+
+
+
+//---------------//
+// Review Graphs //
+//---------------//
+console.log("Graphs");
+
+// 1. Implement an algorithm that checks whether an undirected graph contains
+//    a cycle. Use the graph data structure that uses the adjacency matrix as
+//    internal representation.
+
+
+
+//-----------------------------------------//
+// Review Sorting and Searching Algorithms //
+//-----------------------------------------//
+console.log("Sorting and Searching Algorithms");
+
+// 1. Create two arrays with random unique elements and sort them. Create a
+//    third array that contains all the elements from both arrays in order.
+//    Make the algorithm as fast as possible.
+
+// 2. Implement a linear search that return the number closest to a given
+//    number (instead of returning the index of element, if found).
+
+// 3. Implement a binary search that return the number closest to a given
+//    number (instead of returning the index of element, if found).
+
+
+
+//------------------------------//
+// Review Patterns of Algorithm //
+//------------------------------//
+console.log("Review Patterns of Algorithm");
+
+// 1. Write a recursive function multiply(a, b) where a and a are both positive
+//    integers and you can only use the + and - operators.
+
+function multiply(a,b)
+{
+  if(a === 0)
+    return 0;
+
+  if(a < 0 )
+   return "Error: Integer is not greater than 0"
+
+  if(b < 0 )
+    return "Error: Integer is not greater than 0"
+
+  if(b > 0 )
+    return (b + multiply(a-1, b));
+}
+ 
+console.log(multiply(5, 5));
+
+
+// 2. Write a function that reverses a string with recursion.
+
+function reverseString(str);
+
+
+
+//-----------------------------//
+// Review Algorithm Complexity //
+//-----------------------------//
+console.log("Algorithm Complexity");
+
+// 1. Assess the complexity of all previous implementations.
+
+
+
+
+//---------//
+// Project //
+//---------//
+console.log("Project");
+
+// 1. Solve Project Euler problem 1, see https://projecteuler.net/problem=1
+//    Also check out https://en.wikipedia.org/wiki/Fizz_buzz
+
+// 2. Solve Project Euler problem 2, see https://projecteuler.net/problem=2
+
+// 3. The following data represents the value of a stock over several days:
+//    100, 180, 260, 310, 40, 535, 695. Suppose you can buy and sell one share
+//    once over that time period. Write a program that calculates what the best
+//    time is for buying and selling.
+
+
+
+
+// 4. ...
+
+
+
+</script>
+</head>
+<body>
+  See console!
+</body>
+</html>

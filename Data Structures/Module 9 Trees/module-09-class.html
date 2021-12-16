@@ -1,0 +1,306 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>CMPS 260: Module 9 Class</title>
+<style>* { font-family: monospace; }</style>
+<script>
+//-------------------------//
+// The tree data structure //
+//-------------------------//
+console.log("The tree data structure");
+
+// Skip.
+
+
+
+//------------------//
+// Tree terminology //
+//------------------//
+console.log("Tree terminology");
+
+// Skip.
+
+
+
+//------------------------------------//
+// The binary and binary search trees //
+//------------------------------------//
+console.log("The binary and binary search trees");
+
+function BinarySearchTree() {
+  function Node(key) {
+    this.key = key;
+    this.left = null;
+    this.right = null
+  }
+
+  // the root node
+  var root = null;
+
+  // helper functions
+  function insertNode(node, newNode) {
+    if (newNode.key < node.key) {
+      // go to left
+      if (node.left === null) {
+        // no left node yet so assign
+        node.left = newNode;
+      }
+      else {
+        // move down tree and repeat
+        insertNode(node.left, newNode);
+      }
+    }
+    else {
+      // go to right
+      if (node.right === null) {
+        // no right node yet so assign
+        node.right = newNode;
+      }
+      else {
+        // move down tree and repeat
+        insertNode(node.right, newNode);
+      }
+    }
+  }
+
+  this.insert = function(key) {
+    // insert new key in the tree
+    var newNode = new Node(key);
+    if (root === null) {
+      // no nodes yet
+      root = newNode;
+    }
+    else {
+      // find insert location through insertNode
+      insertNode(root, newNode);
+    }
+  };
+
+  this.search = function(key) {
+    // search for key and return true if found, false otherwise
+  };
+
+  this.inOrderTraverse = function(callback) {
+    // visit all nodes of the tree using in-order traversal
+    // call callback with each key encountered
+  };
+
+  this.preOrderTraverse = function(callback) {
+    // visit all nodes of the tree using pre-order traversal
+    // call callback with each key encountered
+  };
+
+  this.postOrderTraverse = function(callback) {
+    // visit all nodes of the tree using post-order traversal
+    // call callback with each key encountered
+  };
+
+  this.min = function() {
+    // return the minimum key in the tree
+  };
+
+  this.max = function() {
+    // return the maximum key in the tree
+  };
+
+  this.remove = function() {
+    // removes the key from the tree
+  };
+
+  this.print = function() {
+    function print(node) {
+      // check if not is not null
+      if (node !== null) {
+        // text for left child
+        var leftChild = node.left !== null ? node.left.key : "None";
+        // text for right child
+        var rightChild = node.right !== null ? node.right.key : "None";
+        // print output
+        console.log(leftChild + " <-- " + node.key + " --> " + rightChild);
+        // traverse left
+        print(node.left);
+        // traverse right
+        print(node.right);
+      }
+    }
+    console.log("===tree===");
+    print(root);
+    console.log("==========");
+  };
+}
+
+// 1. Complete the construction of the tree below based on the example from
+//    the book.
+
+
+var tree = new BinarySearchTree();
+tree.insert(7);
+tree.insert(15);
+tree.insert(5);
+tree.insert(3);
+tree.insert(9);
+tree.insert(8);
+tree.insert(10);
+tree.insert(13);
+tree.insert(12);
+tree.insert(14);
+tree.insert(20);
+tree.insert(18);
+tree.insert(25);
+
+
+//----------------//
+// Tree traversal //
+//----------------//
+console.log("Tree traversal");
+
+function printNode(value) {
+  console.log(value);
+}
+
+// 1. Implement in-order traversal. Test your implementation with the
+//    printNode() function given above.
+//    NOTE: in-order means all keys are visited in sorted order.
+
+this.inOrderTraverse = function(callback){
+ inOrderTraverseNode(root, callback); //{1}
+};
+
+var inOrderTraverseNode = function (node, callback) {
+ if (node !== null) { //{2}
+ inOrderTraverseNode(node.left, callback); //{3}
+ callback(node.key); //{4}
+ inOrderTraverseNode(node.right, callback); //{5}
+ }
+};
+
+function printNode(value){ //{6}
+ console.log(value);
+}
+tree.inOrderTraverse(printNode); //{7}
+
+// 2. Implement pre-order traversal. Test your implementation with the
+//    printNode() function given above.
+//    NOTE: pre-order means a node is visited prior to its descendants.
+
+this.preOrderTraverse = function(callback){
+ preOrderTraverseNode(root, callback);
+};
+
+var preOrderTraverseNode = function (node, callback) {
+ if (node !== null) {
+ callback(node.key); //{1}
+ preOrderTraverseNode(node.left, callback); //{2}
+ preOrderTraverseNode(node.right, callback); //{3}
+ }
+};
+
+
+// 3. Implement post-order traversal. Test your implementation with the
+//    printNode() function given above.
+//    NOTE: pre-order means a node is visited after its descendants.
+
+this.postOrderTraverse = function(callback){
+ postOrderTraverseNode(root, callback);
+};
+
+var postOrderTraverseNode = function (node, callback) {
+ if (node !== null) {
+ postOrderTraverseNode(node.left, callback); //{1}
+ postOrderTraverseNode(node.right, callback); //{2}
+ callback(node.key); //{3}
+ }
+};
+
+//--------------------------------//
+// Searching for values in a tree //
+//--------------------------------//
+console.log("Searching for values in a tree");
+
+// 1. Implement the min method and show that it works.
+
+this.min = function() {
+ return minNode(root); //{1}
+};
+
+var minNode = function (node) {
+ if (node){
+ while (node && node.left !== null) { //{2}
+ node = node.left; //{3}
+ }
+ return node.key;
+ }
+ return null; //{4}
+};
+
+// 2. Implement the max method and show that it works.
+
+this.max = function() {
+ return maxNode(root);
+};
+var maxNode = function (node) {
+ if (node){
+ while (node && node.right !== null) { //{5}
+ node = node.right;
+ }
+ return node.key;
+ }
+ return null;
+};
+
+
+// 3. Implement the search method and show that it works.
+
+this.search = function(key){
+ return searchNode(root, key); //{1}
+};
+var searchNode = function(node, key){
+   if (node === null){ //{2}
+ return false;
+ }
+ if (key < node.key){ //{3}
+ return searchNode(node.left, key); //{4}
+ } else if (key > node.key){ //{5}
+ return searchNode(node.right, key); //{6}
+ } else {
+ return true; //{7}
+ }
+};
+
+console.log(tree.search(1) ? 'Key 1 found.' : 'Key 1 not found.');
+console.log(tree.search(8) ? 'Key 8 found.' : 'Key 8 not found.');
+
+// 4. Implement the remove method and show that it works.
+
+
+
+//----------------------//
+// Self-balancing trees //
+//----------------------//
+console.log("Self-balancing trees");
+
+// Skip.
+
+
+
+//---------//
+// Project //
+//---------//
+console.log("Project");
+
+// 1. Write a function that takes two trees as input and returns true if
+//    they have the same elements, and false otherwise. Test your code.
+
+function isEqual(tree1, tree2) {
+  // ...
+}
+
+
+
+</script>
+</head>
+<body>
+  See console!
+</body>
+</html>
